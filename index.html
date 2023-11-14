@@ -50,7 +50,6 @@
             text-align: center;
         }
         input{
-            width: 90px;
             outline: none;
             margin: 10px 5%;
             padding: 15px 10px;
@@ -86,7 +85,7 @@
         let tg = window.Telegram.WebApp;
         let buy = document.getElementById('buy');
         let order = document.getElementById('order');
-        tg.expand();
+        // tg.expand();
 
         buy.addEventListener('click', () => {
             document.getElementById('main').style.display = 'none';
@@ -104,14 +103,21 @@
                 document.getElementById('error').innerText = 'Ошибка в имени';
                 return;
             }
-            if (email.length < 9){
+            if (email.length < 5){
                 document.getElementById('error').innerText = 'Ошибка в Email';
                 return;
             }
-            if (phone.length < 11){
+            if (phone.length < 5){
                 document.getElementById('error').innerText = 'Ошибка в номере';
                 return;
             }
+
+            let data = {
+                name: name,
+                email: email,
+                phone: phone
+            }
+            tg.sendData(JSON.stringify(data));
 
             tg.close()
         })
